@@ -21,18 +21,38 @@ int readPosInt(string msg){
     return input;
 }
 
-void outNatural(int num){
+void writeOutNatural(int num){
     if (num > 1){
         Console.Write ($" {num},");
         num--;
-        outNatural(num);
+        writeOutNatural(num);
     }
     else
         Console.Write ($" {num}");
 }
 
+int sumBW(int beg, int end){
+    int res=0;
+    if (end > beg)
+        res = end + beg + sumBW(beg+1,end-1);
+    else if (end==beg)
+        res = end;
+    return res;
+}
+
 Console.Clear();
+
+
 Console.WriteLine("Задача 64: Задайте значение N. Напишите программу, которая выведет все натуральные числа в промежутке от N до 1. Выполнить с помощью рекурсии.");
 int n = readPosInt("Введите N: ");
 Console.Write($"\tНатуральные числа от {n} до 1:");
-outNatural(n);
+writeOutNatural(n);
+
+
+Console.WriteLine("\n\nЗадача 66: Задайте значения M и N. Напишите программу, которая найдёт сумму натуральных элементов в промежутке от M до N.");
+int m = readPosInt("Введите M: ");
+n = readPosInt("Введите N: ");
+Console.WriteLine($"Сумма элементов: {sumBW(m,n)}");
+
+
+Console.WriteLine("\nЗадача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.");
