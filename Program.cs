@@ -13,10 +13,10 @@ m = 2, n = 3 -> A(m,n) = 9
 m = 3, n = 2 -> A(m,n) = 29
 */
 
-int readPosInt(string msg){
+int readPosInt(string msg, bool zero = false){
     int input;
     Console.Write("\t" + msg);
-    while (!(int.TryParse(Console.ReadLine(),out input)) || input < 1)
+    while (!(int.TryParse(Console.ReadLine(),out input)) || ( input < 1 && zero == false))
             Console.Write("\t" + msg);
     return input;
 }
@@ -56,3 +56,18 @@ Console.WriteLine($"Сумма элементов: {sumBW(m,n)}");
 
 
 Console.WriteLine("\nЗадача 68: Напишите программу вычисления функции Аккермана с помощью рекурсии. Даны два неотрицательных числа m и n.");
+m = readPosInt("Введите m: ", true);
+n = readPosInt("Введите n: ", true);
+
+long akkerman(long m, long n){
+    long ret=0;
+    if (m==0)
+        ret = n+1;
+    else if (n == 0 && m!=0)
+        ret = akkerman(m-1, 1);
+    else 
+        ret = akkerman(m-1,akkerman(m,n-1));
+    return ret;
+}
+
+Console.WriteLine ($"\tA({m},{n}) = {akkerman(m,n)}");
